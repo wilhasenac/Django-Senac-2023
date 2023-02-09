@@ -2,9 +2,15 @@
 
 {% block conteudo %}
     listagem de produtos.
-    <ul>
-    {% for produto in produtos %}
-        <li> {{produto.nome }} R$ {{produto.preco}}<a href="#">      Ver datalhes</a></li>
+    {% for produtos_do_vendedor in produtos_de_vendedores %}
+        <div>
+            <h3>{{produtos_do_vendedor.vendedor.nome}}</h3>
+        </div>
+        <ul>
+        {% for produto in produtos_do_vendedor.produtos %}
+                <li> {{produto.nome }} R$ {{produto.preco}}<a href="#">      Ver datalhes</a></li>
+        {% endfor %}
+        </ul>
     {% endfor %}
-    <ul>
+
 {% endblock conteudo %}
