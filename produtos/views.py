@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from produtos.models import Produto
 from produtos.forms import ProdutoModelForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def listagem_produtos(request):
@@ -26,4 +27,12 @@ def cadastrar_produto(request):
     context = {
         'form': form
     }
+
+    if request.method == 'POST':
+        form = ProdutoModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/produtos/')
+    form = ProdutoModelForm
+
     return render(request,'templates/cadastrar_produto.html', context)

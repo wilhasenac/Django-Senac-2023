@@ -1,11 +1,33 @@
 {% extends 'templates/base.html' %}
 
 {% block conteudo %}
-<div>
+<style>
+    .page-container{
+        display: grid;
+        justify-content: center;
+    }
+    form{
+        width: 200px;
+    }
+    form > input[type="submit"]{
+        float: right;
+        padding: 5px;
+        margin-top: 10px;
+    }
+    .container-form{
+        display: flex;
+        flex-direction: column;
+        width:200px;
+    }
+</style>
+<div class="page-container">
     <h3>cadastrar produto</h3>
+    
     <form action="cadastrar" method="post">
+    <div class="container-form">
     {% csrf_token %}
     {{ form }}
+    </div>
     <input type="submit" value="Cadastrar" />
     <form>
 </div>
