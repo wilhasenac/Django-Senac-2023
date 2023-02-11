@@ -1,0 +1,12 @@
+{% extends 'templates/base.html' %}
+
+{% block conteudo %}
+
+<h3>Deseja excluir  {{produto.nome}} ?</h3>
+<form method="post" action="excluir">
+    {% csrf_token %}
+    <input type="submit" value="Sim"/>
+    <a href='/produtos/'>Não</a>
+</form>
+
+{% endblock conteudo %}

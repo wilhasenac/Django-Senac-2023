@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 def listagem_produtos(request):
-    produtos = Produto.objects.all()
+    produtos = Produto.objects.filter(excluido=False)
     produtos_dos_vendedores = [{
         'vendedor': {'nome': 'John Doe'},
         'produtos': produtos
@@ -36,3 +36,21 @@ def cadastrar_produto(request):
     form = ProdutoModelForm
 
     return render(request,'templates/cadastrar_produto.html', context)
+
+def excluir(request, id):
+    
+    produto = get_object_or_404(Produto, pk=id) 
+    form = ProdutoModelForm()
+
+    if request.method == 'POST': 
+        produto.excluido = True
+        produto.save()
+        return HttpResponseRedirect('/produtos/')
+
+    context = {
+        'form': form,
+        'produto': produto
+    }
+
+    return render(request,'templates/excluir.html', context)
+
